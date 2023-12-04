@@ -1,9 +1,9 @@
 
 <template>
-    <form @submit.prevent="addProduct" class="mx-5 mt-3">
+    <form @submit.prevent="addchannel" class="mx-5 mt-3">
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
-                <h2 class="text-base font-semibold leading-7 text-gray-">Add Product</h2>
+                <h2 class="text-base font-semibold leading-7 text-gray-">Add channel</h2>
 
                 <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div class="sm:col-span-4">
@@ -13,25 +13,10 @@
                                 class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                                 <input type="text" name="Name" id="Name"
                                     class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                    placeholder="Gula merah" 
-                                    v-model="productName"/>
+                                    placeholder="My channel" 
+                                    v-model="channelName"/>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-
-                <div class="mt-5">
-                    <label for="price" class="block text-sm font-medium leading-6 text-gray-900">Price</label>
-                    <div class="relative mt-2 rounded-md shadow-sm">
-                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                            <span class="text-gray-500 sm:text-sm">Rp</span>
-                        </div>
-                        <input type="text" name="price" id="price"
-                            class="block rounded-md border-0 py-1.5 pl-10 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            placeholder="0.00" 
-                            v-model="productPrice"
-                            />
                     </div>
                 </div>
 
@@ -54,18 +39,17 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 
-const productName = ref(null);
-const productPrice = ref(null);
+const channelName = ref(null);
+const channelPrice = ref(null);
 
 const router = useRouter();
-const addProduct = async ()=>{
-    const response = await axios.post(import.meta.env.VITE_API_URL + '/api/products', {
-        name: productName.value,
-        price: productPrice.value
+const addchannel = async ()=>{
+    const response = await axios.post(import.meta.env.VITE_API_URL + '/channels', {
+        channelName: channelName.value
     }, {
         withCredentials: true,
     });
     console.log(response.data);
-    router.push('/products/me');
+    router.push('/channels');
 }   
 </script>

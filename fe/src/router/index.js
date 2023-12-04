@@ -2,10 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
-import ShowProducts from '../views/products/ShowProducts.vue'
-import CreateProduct from '../views/products/CreateProduct.vue'
-import MyProducts from '../views/products/MyProducts.vue'
-import UpdateProduct from '../views/products/UpdateProduct.vue'
+import ShowChannels from '../views/channels/ShowChannels.vue'
+import Createchannel from '../views/channels/CreateChannel.vue'
+import Mychannels from '../views/channels/MyChannels.vue'
 import Register from '../views/Register.vue'
 
 const router = createRouter({
@@ -18,23 +17,18 @@ const router = createRouter({
     },
     {
       path: '/channels',
-      name: 'products',
-      component: ShowProducts
+      name: 'channels',
+      component: ShowChannels
     },
     {
-      path: '/products/create',
-      name: 'products.create',
-      component: CreateProduct
+      path: '/channels/create',
+      name: 'channels.create',
+      component: Createchannel
     },
     {
-      path: '/products/me',
-      name: 'products.me',
-      component: MyProducts
-    },
-    {
-      path: '/products/me/:id',
-      name: 'products.update',
-      component: UpdateProduct
+      path: '/channels/me',
+      name: 'channels.me',
+      component: Mychannels
     },
     {
       path: '/auth/login',

@@ -1,5 +1,5 @@
 <script setup>
 </script>
 <template>
-    Home
+    Please refresh2 after login
 </template>

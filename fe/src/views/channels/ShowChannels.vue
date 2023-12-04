@@ -9,14 +9,14 @@ const getMe = async () => {
     try {
         const response = await axios.get(import.meta.env.VITE_API_URL + '/api/users/me', { withCredentials: true });
         console.log(response.data);
-    }catch (e) {
+    } catch (e) {
         console.log(e);
     }
 }
 
 const getData = async () => {
     try {
-        const response = await axios.get(import.meta.env.VITE_API_URL + '/api/products', { withCredentials: true });
+        const response = await axios.get(import.meta.env.VITE_API_URL + '/channels', { withCredentials: true });
         data.value = response.data;
     } catch (e) {
         console.log(e);
@@ -43,13 +43,18 @@ getData();
                 </thead>
                 <tbody>
                     <tr v-if="data" v-for="(item, index) in data.docs">
-                        <td class="border border-slate-800 px-5">{{ index+1 }}</td>
-                        <td class="border border-slate-800 px-5">{{ item.name }}</td>
+                        <td class="border border-slate-800 px-5">{{ index + 1 }}</td>
+                        <td class="border border-slate-800 px-5">{{ item.channelName }}</td>
                         <!-- <td class="border border-b-slate-800 border-r-transparent">Rp</td>
                         <td class="border border-slate-800 pl-5 text-right">{{ new Intl.NumberFormat('id-ID').format(item.price) }}</td> -->
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="mt-5 flex justify-center">
+            <router-link to="/channels/create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Create
+            </router-link>
         </div>
     </div>
 </template>
