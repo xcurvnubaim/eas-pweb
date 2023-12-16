@@ -24,7 +24,7 @@ services:
       - ./be:/home/node/app
       # - ./be/node_modules:/home/node/app/node_modules
     working_dir: /home/node/app/
-    command: sh -c "npm run dev"
+    command: sh -c "npm i && npm run dev"
     env_file:
       - ./be/.env
     # environment:
