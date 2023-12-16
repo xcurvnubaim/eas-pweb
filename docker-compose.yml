@@ -1,0 +1,46 @@
+version: '1'
+
+services:
+  frontend:
+    image: node:18-alpine
+    ports:
+      - '5173:5173'
+    volumes:
+      - ./fe:/home/node/app
+      # - ./fe/node_modules:/home/node/app/node_modules
+    working_dir: /home/node/app/
+    command: sh -c "npm i && npm run dev"
+    depends_on:
+      - backend
+    env_file:
+      - ./fe/.env
+
+  backend:
+    image: node
+    # restart: always
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./be:/home/node/app
+      # - ./be/node_modules:/home/node/app/node_modules
+    working_dir: /home/node/app/
+    command: sh -c "npm run dev"
+    env_file:
+      - ./be/.env
+    # environment:
+    #   - DATABASE_URI=mongodb://mongo:27017/pweb
+
+  # mongo:
+  #   image: mongo
+  #   ports:
+  #     - '27017:27017'
+
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf

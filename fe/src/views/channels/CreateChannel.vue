@@ -46,8 +46,6 @@ const router = useRouter();
 const addchannel = async ()=>{
     const response = await axios.post(import.meta.env.VITE_API_URL + '/channels', {
         channelName: channelName.value
-    }, {
-        withCredentials: true,
     });
     console.log(response.data);
     router.push('/channels');

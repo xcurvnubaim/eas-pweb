@@ -3,14 +3,7 @@ import payload from 'payload'
 
 require('dotenv').config()
 const app = express()
-const cors = require('cors')
 
-app.use(cors(
-  {
-    origin: 'http://localhost:5173',
-    credentials: true,
-  }
-))
 
 // Redirect root to Admin panel
 app.get('/', (_, res) => {

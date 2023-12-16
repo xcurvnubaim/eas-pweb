@@ -10,11 +10,6 @@ const Channel: CollectionConfig = {
             required: true,
         },
         {
-            name: "description",
-            label: "Description",
-            type: "textarea",
-        },
-        {
             name: "members",
             label: "Members",
             type: "relationship",
@@ -28,7 +23,37 @@ const Channel: CollectionConfig = {
             relationTo: "messages",
             hasMany: true,
         }
-    ]
+    ],
+    hooks: {
+        beforeChange: [
+            ({ req, operation, data}) => {
+                if(operation === "create") {
+                    if(req.user) {
+                        data.members = [req.user.id]
+                        return data
+                    }
+                }
+            }
+        ],
+        beforeRead: [
+            ({ req,doc, query }) => {
+                if (req.user) {
+                    query.where = {
+                        members: req.user.id,
+                    };
+                    return doc;
+                }
+            }
+        ]
+    },
+    // access: {
+    //     create: () => re,
+    //     read: ({ req, data }) => {
+    //         return req.user;
+    //     },
+    //     update: () => false,
+    //     delete: () => false,
+    // },
 }
 
 export default Channel
