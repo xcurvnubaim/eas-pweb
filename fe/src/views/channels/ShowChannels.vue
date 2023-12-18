@@ -7,33 +7,26 @@ const data = ref(null);
 const authStore = useAuthStore();
 
 
-const getMe = async () => {
-    try {
-        const response = await axios.get(import.meta.env.VITE_API_URL + '/api/users/me', { withCredentials: true });
-        console.log(response.data);
-    } catch (e) {
-        console.log(e);
-    }
-}
-
 const getData = async () => {
     try {
-        const response = await axios.get(import.meta.env.VITE_API_URL + `/channels?where[members][not_equals]=${authStore.user.id}`);
-        data.value = response.data;om
+        const response = await axios.get(import.meta.env.VITE_API_URL + `/channels?where[members][not_in]=${authStore.user.id}`);
+        data.value = response.data;
     } catch (e) {
         console.log(e);
     }
 }
 
-const joinChannel = async () => {
+const joinChannel = async (channel) => {
     try {
-
+        channel.members = channel.members.map((item)=> item.id)        
+        channel.members.push(authStore.user.id);
+        const res = await axios.patch(import.meta.env.VITE_API_URL + `/channels/${channel.id}`, channel);
+        console.log(res)
     } catch (e) {
         console.log(e);
     }
 }
 
-getMe();
 getData();
 
 </script>
@@ -56,20 +49,13 @@ getData();
                         <td class="border border-slate-800 px-5">{{ index + 1 }}</td>
                         <td class="border border-slate-800 px-5">{{ item.channelName }}</td>
                         <td class="flex justify-center">
-                            <a :href="'/channels/'+item.id">
-                                <button @click="joinChannel" class="border bg-green-300 px-3 py-2 rounded-xl hover:bg-green-800">
-                                    Join
-                                </button>
-                            </a>
+                            <button @click="joinChannel(item)" class="border bg-green-300 px-3 py-2 rounded-xl hover:bg-green-800">
+                                Join
+                            </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="mt-5 flex justify-center">
-            <router-link to="/channels/create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Create
-            </router-link>
         </div>
     </div>
 </template>

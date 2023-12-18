@@ -23,6 +23,7 @@ const login = async () => {
     console.log("Login failed");
   }
 };
+
 </script>
 
 <template>

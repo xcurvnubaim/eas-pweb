@@ -55,6 +55,11 @@ const logout = () => {
                                 <RouterLink to="/channels" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md 
                                         px-3 py-2 text-sm font-medium">Channels</RouterLink>
                             </div>
+
+                            <div v-if="authStore.isAuthenticated">          
+                                <RouterLink to="/channels/me" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md 
+                                        px-3 py-2 text-sm font-medium">My Channels</RouterLink>
+                            </div>
                         </div>
                     </div>
                 </div>
