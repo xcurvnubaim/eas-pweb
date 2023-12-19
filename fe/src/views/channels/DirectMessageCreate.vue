@@ -63,7 +63,7 @@ const addchannel = async () => {
         },
         {
           members: {
-            equals: userSelected.value
+            equals: userSelected.value.id
           }
         },
         {
