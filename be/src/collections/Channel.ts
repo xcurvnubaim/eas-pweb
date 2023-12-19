@@ -15,6 +15,11 @@ const Channel: CollectionConfig = {
             type: "relationship",
             relationTo: "users",
             hasMany: true,
+        },
+        {
+            name: "isDirectMessage",
+            label: "Direct Message",
+            type: "checkbox",
         }
     ],
     hooks: {
@@ -27,26 +32,8 @@ const Channel: CollectionConfig = {
                     }
                 }
             }
-        ],
-        beforeRead: [
-            ({ req,doc, query }) => {
-                if (req.user) {
-                    query.where = {
-                        members: req.user.id,
-                    };
-                    return doc;
-                }
-            }
         ]
     },
-    // access: {
-    //     create: () => re,
-    //     read: ({ req, data }) => {
-    //         return req.user;
-    //     },
-    //     update: () => false,
-    //     delete: () => false,
-    // },
 }
 
 export default Channel
