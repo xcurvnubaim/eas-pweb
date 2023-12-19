@@ -15,13 +15,6 @@ const Channel: CollectionConfig = {
             type: "relationship",
             relationTo: "users",
             hasMany: true,
-        },
-        {
-            name: "messages",
-            label: "Messages",
-            type: "relationship",
-            relationTo: "messages",
-            hasMany: true,
         }
     ],
     hooks: {

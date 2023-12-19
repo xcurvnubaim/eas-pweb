@@ -37,9 +37,11 @@ const sendChat = async ()=>{
 </script>
 
 <template>
-  Chat
+  <div class="text-center">
+    Chat
+  </div>
   <div v-for="item in chat.docs" :key="item.id" class="mb-4">
-    <div class="text-gray-500">{{ item.user.email }}</div>
+    <div class="text-gray-500">{{ item.user.name }}</div>
     <div class="bg-gray-100 rounded-lg p-2">{{ item.message }}</div>
   </div>
 
