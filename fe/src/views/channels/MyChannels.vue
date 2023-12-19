@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { useAuthStore } from '../../store/auth';
+import qs from 'qs';
 
 const data = ref(null);
 const authStore = useAuthStore();
@@ -16,9 +17,28 @@ const getMe = async () => {
     }
 }
 
+const query = qs.stringify({
+    where: {
+        and: [
+            {
+                members: {
+                    equals: authStore.user.id
+                }
+            },
+            {
+                isDirectMessage: {
+                    not_equals: true
+                }
+            }
+        ]
+    },
+}, {
+    addQueryPrefix: true
+})
+
 const getData = async () => {
     try {
-        const response = await axios.get(import.meta.env.VITE_API_URL + `/channels?where[members][equals]=${authStore.user.id}`);
+        const response = await axios.get(import.meta.env.VITE_API_URL + `/channels${query}`);
         data.value = response.data;om
     } catch (e) {
         console.log(e);

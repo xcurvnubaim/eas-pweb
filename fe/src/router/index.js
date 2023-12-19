@@ -6,6 +6,8 @@ import Createchannel from '../views/channels/CreateChannel.vue'
 import Mychannels from '../views/channels/MyChannels.vue'
 import Register from '../views/Register.vue'
 import Chat from '../views/channels/ChatView.vue'
+import DirectMessage from '../views/channels/DirectMessage.vue'
+import DirectMessageCreate from '../views/channels/DirectMessageCreate.vue'
 import { useAuthStore } from '../store/auth'
 
 const router = createRouter({
@@ -24,6 +26,14 @@ const router = createRouter({
     {
       path: '/chat/:channelId',
       component: Chat
+    },
+    {
+      path: '/chat',
+      component: DirectMessage
+    },
+    {
+      path: '/dm/create',
+      component: DirectMessageCreate
     },
     {
       path: '/channels/create',
