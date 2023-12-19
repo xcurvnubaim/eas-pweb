@@ -82,17 +82,13 @@ const addchannel = async () => {
     return;
   } else {
     console.log(userSelected.value)
-    const response1 = await axios.post(import.meta.env.VITE_API_URL + '/channels', {
+    const response1 = await axios.post(import.meta.env.VITE_API_URL + '/channels?depth=0&fallback-locale=null', {
       channelName: `chat ${authStore.user.name} - ${userSelected.value.name}`,
       members: [authStore.user.id, userSelected.value.id],
       isDirectMessage: true
     });
-    // const response2 = await axios.patch(import.meta.env.VITE_API_URL + '/channels/' + response1.data.docs.id, {
-    //   channelName: `chat ${authStore.user.name} - ${userSelected.value.name}`,
-    //   members: [authStore.user.id, userSelected.value.id],
-    //   isDirectMessage: true
-    // });
-    console.log(response2.data);
+    
+    console.log(response1.data);
     // router.push('/chat/'+response.data.docs.id);
   }
 }   
