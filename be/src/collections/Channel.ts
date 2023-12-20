@@ -22,18 +22,6 @@ const Channel: CollectionConfig = {
             type: "checkbox",
         }
     ],
-    // hooks: {
-    //     beforeChange: [
-    //         ({ req, operation, data}) => {
-    //             if(operation === "create") {
-    //                 if(req.user) {
-    //                     data.members = [req.user.id]
-    //                     return data
-    //                 }
-    //             }
-    //         }
-    //     ]
-    // },
 }
 
 export default Channel

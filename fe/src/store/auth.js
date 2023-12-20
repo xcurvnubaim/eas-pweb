@@ -11,7 +11,7 @@ export const useAuthStore = defineStore("auth", {
   actions: {
     async login({ email, password }) {
       try {
-        const response = await axios.post("/api/users/login", {
+        const response = await axios.post("http://localhost:3000/api/users/login", {
           email,
           password,
         });
@@ -34,7 +34,9 @@ export const useAuthStore = defineStore("auth", {
 
     async logout() {
       try {
-        const response = await axios.post("/api/users/logout");
+        const response = await axios.post("http://localhost:3000/api/users/logout", {
+          withCredentials: true
+        });
         if (response.status === 200) {
           console.log(response);
           this.user = null;
@@ -52,7 +54,9 @@ export const useAuthStore = defineStore("auth", {
 
     async checkAuthentication() {
       try {
-        const response = await axios.get("/api/users/me");
+        const response = await axios.get("http://localhost:3000/api/users/me", {
+          withCredentials: true
+        });
         if (response.data.user) {
           this.user = response.data.user;
           this.isAuthenticated = true;

@@ -29,7 +29,9 @@ const query = qs.stringify({
 console.log(query)
 const getData = async () => {
   try {
-    const response = await axios.get(import.meta.env.VITE_API_URL + `/channels${query}`);
+    const response = await axios.get(import.meta.env.VITE_API_URL + `/channels${query}`, {
+      withCredentials: true
+    });
     data.value = response.data;
   } catch (e) {
     console.log(e);
@@ -40,7 +42,9 @@ const joinChannel = async (channel) => {
   try {
     channel.members = channel.members.map((item) => item.id)
     channel.members.push(authStore.user.id);
-    const res = await axios.patch(import.meta.env.VITE_API_URL + `/channels/${channel.id}`, channel);
+    const res = await axios.patch(import.meta.env.VITE_API_URL + `/channels/${channel.id}`, channel, {
+      withCredentials: true
+    });
     console.log(res)
   } catch (e) {
     console.log(e);

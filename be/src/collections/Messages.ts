@@ -21,7 +21,10 @@ const Messages: CollectionConfig = {
             type: "relationship",
             relationTo: "channels",
         },
-    ]
+    ],
+    access: {
+        delete: ()=> true
+    }
 }
 
 export default Messages

@@ -40,7 +40,9 @@ const allUser = ref(null);
 const userSelected = ref(null);
 const getAllUser = async () => {
   try {
-    const response = await axios.get(import.meta.env.VITE_API_URL + '/users');
+    const response = await axios.get(import.meta.env.VITE_API_URL + '/users', {
+      withCredentials: true
+    });
     allUser.value = response.data.docs;
     console.log(allUser.value);
   } catch (e) {
@@ -76,7 +78,9 @@ const addchannel = async () => {
   }, {
     addQueryPrefix: true
   })
-  const checkIfAlreadyExist = await axios.get(import.meta.env.VITE_API_URL + `/channels${query}`);
+  const checkIfAlreadyExist = await axios.get(import.meta.env.VITE_API_URL + `/channels${query}`, {
+    withCredentials: true
+  });
   if(checkIfAlreadyExist.data.docs.length > 0) {
     router.push('/chat/'+checkIfAlreadyExist.data.docs[0].id);
     return;
@@ -86,6 +90,8 @@ const addchannel = async () => {
       channelName: `chat ${authStore.user.name} - ${userSelected.value.name}`,
       members: [authStore.user.id, userSelected.value.id],
       isDirectMessage: true
+    }, {
+      withCredentials: true
     });
     
     console.log(response1.data);

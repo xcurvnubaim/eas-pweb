@@ -11,7 +11,9 @@ const authStore = useAuthStore();
 channelId.value = router.params.channelId;
 const getChat = async ()=>{
     try {
-      const {data: data} = await axios.get(import.meta.env.VITE_API_URL + '/messages?where[channel][equals]=' + channelId.value + '&sort=createdAt');
+      const {data: data} = await axios.get(import.meta.env.VITE_API_URL + '/messages?where[channel][equals]=' + channelId.value + '&sort=createdAt', {
+        withCredentials: true
+      });
       console.log(data)
       chat.value = data;
     } catch (e) {
@@ -27,6 +29,8 @@ const sendChat = async ()=>{
       message: message.value,
       channel: channelId.value,
       user: authStore.user.id
+    }, {
+      withCredentials: true
     });
     console.log(data)
     message.value=""
