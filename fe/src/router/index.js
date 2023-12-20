@@ -9,10 +9,15 @@ import Chat from '../views/channels/ChatView.vue'
 import DirectMessage from '../views/channels/DirectMessage.vue'
 import DirectMessageCreate from '../views/channels/DirectMessageCreate.vue'
 import { useAuthStore } from '../store/auth'
+import HaloJamal from '../views/JamalView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/jamal',
+      component: HaloJamal
+    },
     {
       path: '/',
       name: 'home',

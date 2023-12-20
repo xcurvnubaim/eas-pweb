@@ -95,7 +95,7 @@ const addchannel = async () => {
     });
     
     console.log(response1.data);
-    // router.push('/chat/'+response.data.docs.id);
+    router.push('/chat/'+response1.data.docs.id);
   }
 }   
 </script>
