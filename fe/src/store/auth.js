@@ -36,7 +36,7 @@ export const useAuthStore = defineStore("auth", {
 
     async logout() {
       try {
-        const response = await axios.post("http://localhost:3000/api/users/logout", {
+        const response = await axios.post("http://localhost:3000/api/users/logout",{},{
           withCredentials: true
         });
         if (response.status === 200) {
